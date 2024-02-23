@@ -4,7 +4,7 @@ const containerHeight = window.innerHeight - 18 - 37.2; // 37.2 is size of butto
 container.style.height = `${containerHeight}px`;
 container.style.width = `${containerHeight*2/3}px`;
 
-const buttons = document.querySelectorAll('button');
+const buttons = document.querySelectorAll('button'); 
 buttons.forEach( (button) => {
     const buttonHeight = button.clientHeight;
     button.style.width = `${buttonHeight}px`;
@@ -21,7 +21,7 @@ var operatorActive = false;
 buttons.forEach ( (button) => {
     button.addEventListener("click", () => {
         for(let i = 0; i<10; i++) {
-            if (button.textContent == i) { numButton(i) };
+            if (button.textContent == i) { onNumClicked(i) };
         }
         switch(button.textContent) {
             case 'C': 
@@ -52,17 +52,14 @@ buttons.forEach ( (button) => {
     });
 });
 
-const numButton = (num) => {
-    if (display.textContent == '0') {
-        display.textContent = num;
-    }
-    else if (operatorActive === true) {
+const onNumClicked = (num) => {
+    if (operatorActive || display.textContent == '0') {
         display.textContent = num;
         operatorActive = false;
-    }
-    else {
+    } else {
         display.textContent = `${display.textContent}${num}`;
     }
+
     return display.textContent;
 }
 
